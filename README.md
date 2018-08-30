@@ -17,6 +17,25 @@ create_check_in_csv(2018,'王某某',chuchai = [[1,1],[12,31]],zhuwai = [[1,4]],
 ### 生成文件：
 ![生成文件](https://github.com/4thfever/csv_for_check_in/blob/master/pics/example2.PNG)
 
-# 参数：
+# 参数
 
-# 依赖：
+```
+create_check_in_csv(year,name,**args)
+year#要生成考勤表的年份，目前支持2004-2018年
+#考勤对象姓名，不写的话用空格 ' '填充
+args#
+chuchai# 出差日期，用[[m1,d1],[m2,d2],...,[mn,dn]]表示，m，d为出差的月份与日。出差的每一天需分开写入
+zhuwai# 驻外，表达方式同上
+nianjia# 年假
+shijia# 事假
+bingjia# 病假
+hunjia# 婚假
+chanjia# 产假
+tanqin# 探亲假
+sangjia# 丧假
+gongshang# 工伤
+kuanggong# 旷工
+```
+## 依赖
+python-docx
+chinese-calendar
