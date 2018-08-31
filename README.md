@@ -19,7 +19,7 @@ create_check_in_csv(2018,'王某某',chuchai = [[1,1],[12,31]],zhuwai = [[1,4]],
 
 # 参数
 
-```
+```python
 create_check_in_csv(year,name,**args)
 year#要生成考勤表的年份，目前支持2004-2018年
 name#考勤对象姓名，不写的话用空格 ' '填充
