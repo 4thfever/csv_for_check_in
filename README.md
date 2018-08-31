@@ -1,4 +1,5 @@
 # 生成考勤表
+![](https://img.shields.io/badge/language-python-orange.svg)
 自动调用中国假期数据，排列出国家法定的节假日与工作日，外加自由设定的个人假期，最后给出符合联研院计算所标准的考勤表格。
 ## 安装
 clone到本地即可
