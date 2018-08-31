@@ -22,8 +22,8 @@ create_check_in_csv(2018,'王某某',chuchai = [[1,1],[12,31]],zhuwai = [[1,4]],
 ```
 create_check_in_csv(year,name,**args)
 year#要生成考勤表的年份，目前支持2004-2018年
-#考勤对象姓名，不写的话用空格 ' '填充
-args#
+name#考勤对象姓名，不写的话用空格 ' '填充
+args#其他假期数据
 chuchai# 出差日期，用[[m1,d1],[m2,d2],...,[mn,dn]]表示，m，d为出差的月份与日。出差的每一天需分开写入
 zhuwai# 驻外，表达方式同上
 nianjia# 年假
