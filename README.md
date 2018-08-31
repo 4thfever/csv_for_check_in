@@ -10,7 +10,7 @@ clone到本地即可
 
 ### 使用
 打开 create_check_in_csv.py，调用create_check_in_csv 函数
-```
+```python
 create_check_in_csv(2018,'王某某',chuchai = [[1,1],[12,31]],zhuwai = [[1,4]],kuanggong = [[1,2]])
 ```
 
