@@ -41,4 +41,6 @@ kuanggong]# 旷工
 ```
 ## 依赖
 python-docx
+pandas
+numpy
 chinese-calendar
