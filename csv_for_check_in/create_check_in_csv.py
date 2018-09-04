@@ -6,13 +6,13 @@ from find_workday import DaysInfo
 from docx import Document
 
 #输入年份，姓名和其他信息，输出docx考勤表
-def create_check_in_csv(year,name,):
+def create_check_in_csv(year,name,csv_file):
 	#调用find_workday程序
 	if type(year) != int:
 		raise TypeError('年份必须为int类型')
 	if type(name) != str:
 		raise TypeError('姓名必须为str类型')
-	c = DaysInfo(year,**args)
+	c = DaysInfo(year,csv_file)
 	df_days = c.df_days
 	
 	#将表分为考勤部分和统计部分，分别处理
@@ -60,5 +60,5 @@ def create_check_in_csv(year,name,):
 	doc.save('output.docx')
 if __name__ == '__main__':
 	# create_check_in_csv(2018,'')
-	create_check_in_csv(2018,'王某某',chuchai = [[1,1],[12,31]],zhuwai = [[1,4]],kuanggong = [[1,2]])
+	create_check_in_csv(2018,'王某某','attendance.csv')
 	# create_check_in_csv(2018.1,'王某某')
