@@ -1,3 +1,5 @@
 python_version > '3.4';
 chinese_calendar > '1.0.7';
 docx >　'0.2.4';
+pandas > '0.23.4';
+numpy > '1.15.0';
