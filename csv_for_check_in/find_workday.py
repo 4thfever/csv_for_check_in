@@ -12,36 +12,33 @@ class DaysInfo(object):
 	#可以选择是否输入其他类型假期的csv，不输入则为无
 	def __init__(self, year, csv_file = ''):
 		if csv_file != '':
-			self.csv_info = read_csv(year,csv_file)
+			self.atte = read_csv(year,csv_file)
 		else:
-			self.csv_info = [[]]
-		super(DaysInfo, self).__init__()
-		
-		absence =['chuchai','zhuwai','nianjia','shijia','bingjia','hunjia','chanjia','tanqin','sangjia','gongshang','kuanggong']
+			self.atte = [[]]
 		self.year = year
-		self.get_input()
+		self.get_days_in_year()
 		self.find_holidays()
 		self.find_workdays()
-		self.days_info(self.csv_info)
+		self.days_info(self.atte)
 		self.create_df()
 
 	#一年的开头结尾
-	def get_input(self):
-		self.start = datetime.date(self.year,1,1)
-		self.end = datetime.date(self.year,12,31)
+	def get_days_in_year(self):
+		self.year_start = datetime.date(self.year,1,1)
+		self.year_end = datetime.date(self.year,12,31)
 
 	#调用chinese calendar，输出工作日和休息日
 	def find_workdays(self):
-		self.workdays = get_workdays(self.start,self.end)
+		self.workdays = get_workdays(self.year_start,self.year_end)
 		self.workdays = [[workday.month,workday.day] for workday in self.workdays]
 
 	def find_holidays(self):
-		self.holidays = get_holidays(self.start,self.end)
+		self.holidays = get_holidays(self.year_start,self.year_end)
 		self.holidays = [[holiday.month,holiday.day] for holiday in self.holidays]
 
 	#读入每个日程的数据
 	#0代表不存在这一天，1workday，2holiday，3出差，4 驻外工作，5年休假，6事假，7病假，8婚假，9产假，10探亲假，11丧假，12工伤假，13旷工
-	def days_info(self,csv_info):
+	def days_info(self,atte):
 		self.list_days = np.zeros([12,31])
 		for i in range(1,13):
 			for j in range(1,32):
@@ -52,12 +49,12 @@ class DaysInfo(object):
 				if [i,j] in self.holidays:
 					self.list_days[i-1,j-1] = 2
 
-		for i,absence in enumerate(self.csv_info):
+		for i,absence in enumerate(self.atte):
 			for j,the_date in enumerate(absence):
 				#默认跳过周六日
 				if self.list_days[the_date[0] - 1,the_date[1] - 1 ] != 2:
 					if self.list_days[the_date[0] - 1,the_date[1] - 1 ] > 2:
-						print('出勤信息重复！')
+						raise TypeError('出勤信息重复！')
 					else:	
 						self.list_days[the_date[0] - 1,the_date[1] - 1 ] = i + 3
 

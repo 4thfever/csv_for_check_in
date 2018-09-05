@@ -6,26 +6,25 @@ from find_workday import DaysInfo
 from docx import Document
 
 #输入年份，姓名和其他信息，输出docx考勤表
-def create_check_in_csv(year,name,csv_file):
+def create_check_in_csv(year,name = '',csv_file = ''):
 	#调用find_workday程序
 	if type(year) != int:
 		raise TypeError('年份必须为int类型')
 	if type(name) != str:
 		raise TypeError('姓名必须为str类型')
-	c = DaysInfo(year,csv_file)
-	df_days = c.df_days
+	df_days = DaysInfo(year,csv_file).df_days
 	
 	#将表分为考勤部分和统计部分，分别处理
 	columns = [i for i in range(32)]
-	df_days_only = df_days[df_days.columns[0:31]]
-	df_info_only = df_days[df_days.columns[31:]]
+	df_days_part = df_days[df_days.columns[0:31]]
+	df_info_part = df_days[df_days.columns[31:]]
 
 	#将数字换为图形
 	for i,sign in enumerate(['/','√','','☆','◇','※','□','○','Δ','▽','♀','⊥','＃','×']):
-		df_days_only = df_days_only.replace(i,sign)
+		df_days_part = df_days_part.replace(i,sign)
 
 	#重新合并
-	df_days = pd.concat([df_days_only,df_info_only],axis =1)
+	df_days = pd.concat([df_days_part,df_info_part],axis =1)
 
 	# 打开模板
 	doc = Document('example.docx')
@@ -33,8 +32,8 @@ def create_check_in_csv(year,name,csv_file):
 	table = doc.tables[0]
 	for i,row in enumerate(table.rows):
 		for j,cell in enumerate(row.cells):
-			# print(cell.text)
 			if i>1:
+				#填入年份
 				if '年' in cell.text:
 					cell.text = cell.text.replace('年','{}年'.format(year))
 				#从第二行第二列起放一月一日的数据
@@ -59,6 +58,6 @@ def create_check_in_csv(year,name,csv_file):
 
 	doc.save('output.docx')
 if __name__ == '__main__':
-	# create_check_in_csv(2018,'')
-	create_check_in_csv(2018,'王某某','attendance.csv')
-	# create_check_in_csv(2018.1,'王某某')
+	create_check_in_csv(2018)
+	# create_check_in_csv(2018,'王某某','attendance.csv')
+	# create_check_in_csv(2018,'王某某')
