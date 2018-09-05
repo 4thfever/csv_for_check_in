@@ -22,6 +22,7 @@ create_check_in_csv(2018,'王某某')
 create_check_in_csv(2018,'王某某'，'attendance.csv')
 ```
 attendance.csv的样式如下：
+
 ![attendance.csv](https://github.com/4thfever/csv_for_check_in/blob/master/pics/example2.PNG)
 
 
