@@ -42,6 +42,10 @@ def create_check_in_csv(year,name = '',csv_file = ''):
 					day_num = j-2
 					
 					cell.text = str(df_days.values[month_num][day_num])
+					paragraph =cell.paragraphs[0]
+					run = paragraph.runs
+					font = run[0].font
+					font.name = '仿宋'
 				#放姓名
 				if j == 1:
 					cell.text = name
@@ -58,6 +62,6 @@ def create_check_in_csv(year,name = '',csv_file = ''):
 
 	doc.save('output.docx')
 if __name__ == '__main__':
-	create_check_in_csv(2018)
-	# create_check_in_csv(2018,'王某某','attendance.csv')
+	# create_check_in_csv(2012)
+	create_check_in_csv(2018,'王某某','attendance.csv')
 	# create_check_in_csv(2018,'王某某')
